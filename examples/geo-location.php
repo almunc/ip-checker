@@ -13,6 +13,10 @@ $IP = new IP();
 if($res = $IP->ipapi()){
     echo "<h3>Your data according to <a href='//ipapi.com' target='_blank'>ipapi</a>:</h2><table border='1' style='text-align: center;'><tr><th>Property</th><th>Value</th>";
     foreach($res as $key => $value){
+        //Php displays the boolean true as 1 and doesn't display false, the following three lines will fix this (needed for the proxy row)
+        if(is_bool($value)){
+            $value = ($value) ? "Yes" : "No";
+        }
         echo "<tr><td>{$key}</td><td>{$value}</td></tr>";
     }
 }
